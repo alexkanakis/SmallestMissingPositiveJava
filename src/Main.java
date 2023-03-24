@@ -3,25 +3,38 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        int d[] = readArray();
+        int[] d = readArray();
         System.out.println("\nThe smallest missing positive is: " + smallestMissingPositive(d));
     }
 
     public static int[] readArray(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the size of the array: ");
-        int n = 0;
 
-        if(sc.hasNextInt()){
-            n = sc.nextInt();
+        int n ;
+
+        while(true){
+            System.out.println("Enter the size of the array: ");
+            if(sc.hasNextInt()){
+                n = sc.nextInt();
+                break;
+            }else{
+                System.out.println("Invalid input, please enter an integer.");
+                sc.nextLine(); // clears the buffer
+            }
         }
+
         int[] a = new int[n];
 
-        System.out.println("Enter the elements of the array: ");
+        System.out.println("Enter " + n + " elements for the array: ");
+
         for (int i = 0; i < n; i++) {
-            if (sc.hasNextInt()) {
-                a[i] = sc.nextInt();
+            System.out.println("Element " + (i+1)  + ": ");
+            while(!sc.hasNextInt()){
+                System.out.println("Invalid input, please enter an integer.");
+                sc.nextLine(); // clears the buffer
+                System.out.println("Element " + (i+1)  + ": ");
             }
+            a[i] = sc.nextInt();
         }
 
         System.out.println("The elements of the array are: ");
@@ -38,9 +51,9 @@ public class Main {
         int n = A.length;
         boolean[] present = new boolean[n+1];
 
-        for (int i = 0; i < n; i++) {
-            if (A[i] > 0 && A[i] <= n) {
-                present[A[i]] = true;
+        for (int j : A) {
+            if (j > 0 && j <= n) {
+                present[j] = true;
             }
         }
 
